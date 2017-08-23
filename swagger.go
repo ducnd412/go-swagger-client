@@ -3,10 +3,8 @@ package swagger
 import (
 	"log"
 	"text/template"
-	"github.com/GeertJohan/go.rice"
 	"net/http"
 	"strings"
-	"fmt"
 )
 
 type Config struct {
@@ -56,7 +54,6 @@ func (s *SwaggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	upath := r.URL.Path
 	basePath := upath[0:strings.LastIndex(upath, "/")]
-	fmt.Println(upath, basePath)
 	if strings.HasSuffix(upath, ".png") || strings.HasSuffix(upath, ".css") || strings.HasSuffix(upath, ".js") {
 		if p := strings.TrimPrefix(r.URL.Path, basePath); len(p) < len(r.URL.Path) {
 			r.URL.Path = p
