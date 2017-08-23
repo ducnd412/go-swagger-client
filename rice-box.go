@@ -1,4 +1,4 @@
-package swagger
+package swaggerui
 
 import (
 	"github.com/GeertJohan/go.rice/embedded"

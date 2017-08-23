@@ -1,8 +1,9 @@
-package swagger
+package swaggerui
 
 import (
 	"log"
 	"text/template"
+	"github.com/GeertJohan/go.rice"
 	"net/http"
 	"strings"
 )
