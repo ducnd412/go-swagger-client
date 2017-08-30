@@ -1,0 +1,22 @@
+{
+  "name": "go-swagger-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ducnd412/go-swagger-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ducnd412/go-swagger-client/issues"
+  },
+  "homepage": "https://github.com/ducnd412/go-swagger-client#readme",
+  "dependencies": {
+    "swagger-ui-dist": "^2.2"
+  }
+}
