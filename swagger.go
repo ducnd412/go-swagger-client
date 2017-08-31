@@ -54,7 +54,6 @@ func New(config *Config) http.Handler {
 		staticHandler: http.FileServer(static.HTTPBox()),
 		template:      indexTemplate,
 	}
-
 }
 
 func (s *SwaggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
