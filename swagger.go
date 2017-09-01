@@ -57,7 +57,6 @@ func New(config *Config) http.Handler {
 
 func (s *SwaggerHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
-	urlPath := r.URL.Path
 	prefix := strings.TrimPrefix(r.URL.Path, s.config.BasePath)
 
 	if file, err := s.static.Open(prefix); err == nil {
