@@ -31,9 +31,41 @@
     <!-- <script src='{{.BasePath}}/lang/translator.js' type='text/javascript'></script> -->
     <!-- <script src='{{.BasePath}}/lang/ru.js' type='text/javascript'></script> -->
     <!-- <script src='{{.BasePath}}/lang/en.js' type='text/javascript'></script> -->
+    <style>
+        .set_token {
+            display: block;
+            text-decoration: none;
+            font-weight: 700;
+            padding: 6px 8px;
+            font-size: .9em;
+            color: #fff !important;
+            background-color: #547f00;
+            border-radius: 4px;
+        }
 
+        #jwt-token {
+            width: 300px;
+        }
+    </style>
     <script type="text/javascript">
+
         $(function () {
+            document.getElementById('jwt-token').value = localStorage.getItem('access_token');
+
+            function setApiKey() {
+                const jwtToken = localStorage.getItem('access_token');
+                if (jwtToken) {
+                    var apiKeyAuth =
+                        new SwaggerClient.ApiKeyAuthorization('Authorization', "Bearer " + localStorage.getItem('access_token'), 'header');
+                    window.swaggerUi.api.clientAuthorizations.add('key', apiKeyAuth);
+                }
+            }
+
+            function setToken() {
+                localStorage.setItem('access_token', document.getElementById('jwt-token').value);
+                setApiKey()
+            }
+
             var url = window.location.search.match(/url=([^&]+)/);
             if (url && url.length > 1) {
                 url = decodeURIComponent(url[1]);
@@ -81,6 +113,8 @@
 
             window.swaggerUi.load();
 
+            setApiKey()
+
             function log() {
                 if ('console' in window) {
                     console.log.apply(console, arguments);
@@ -97,10 +131,17 @@
         <a id="logo" href="http://swagger.io"><img class="logo__img" alt="swagger" height="30" width="30"
                                                    src="{{.BasePath}}/images/logo_small.png"/><span class="logo__title">swagger</span></a>
         <form id='api_selector'>
-            <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl"
-                                      type="text"/></div>
+            <div class='input'><input style="display: none" placeholder="http://example.com/api" id="input_baseUrl"
+                                      name="baseUrl"
+                                      type="text"/>
+                <input id="jwt-token" placeholder="JWT Token goes here">
+
+
+            </div>
             <div id='auth_container'></div>
-            <div class='input'><a id="explore" class="header__btn" href="#" data-sw-translate>Explore</a></div>
+            <div class='input'>
+                <a class="set_token" class="header__btn" href="#" onclick="setToken()">Set Token</a>
+                <a id="explore" style="display: none" class="header__btn" href="#" data-sw-translate>Explore</a></div>
         </form>
     </div>
 </div>
