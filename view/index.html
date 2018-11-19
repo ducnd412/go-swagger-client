@@ -48,23 +48,23 @@
         }
     </style>
     <script type="text/javascript">
+        function setApiKey() {
+            const jwtToken = localStorage.getItem('access_token');
+            if (jwtToken) {
+                var apiKeyAuth =
+                        new SwaggerClient.ApiKeyAuthorization('Authorization', "Bearer " + localStorage.getItem('access_token'), 'header');
+                window.swaggerUi.api.clientAuthorizations.add('key', apiKeyAuth);
+            }
+        }
 
+        function setToken() {
+            localStorage.setItem('access_token', document.getElementById('jwt-token').value);
+            setApiKey()
+        }
         $(function () {
             document.getElementById('jwt-token').value = localStorage.getItem('access_token');
 
-            function setApiKey() {
-                const jwtToken = localStorage.getItem('access_token');
-                if (jwtToken) {
-                    var apiKeyAuth =
-                        new SwaggerClient.ApiKeyAuthorization('Authorization', "Bearer " + localStorage.getItem('access_token'), 'header');
-                    window.swaggerUi.api.clientAuthorizations.add('key', apiKeyAuth);
-                }
-            }
 
-            function setToken() {
-                localStorage.setItem('access_token', document.getElementById('jwt-token').value);
-                setApiKey()
-            }
 
             var url = window.location.search.match(/url=([^&]+)/);
             if (url && url.length > 1) {
@@ -112,8 +112,7 @@
             });
 
             window.swaggerUi.load();
-
-            setApiKey()
+            setApiKey();
 
             function log() {
                 if ('console' in window) {
