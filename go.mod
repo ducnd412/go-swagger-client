@@ -1,4 +1,4 @@
-module go-swagger-client
+module github.com/ducnd412/go-swagger-client
 
 require (
 	github.com/GeertJohan/go.rice v0.0.0-20170420135705-c02ca9a983da
